@@ -89,3 +89,125 @@ print(produtos_com_caracteres_especiais['PR_NOME'].head())
 
 # Os registros encontrados serão avaliados na etapa de limpeza.
 
+#---------- Sprint 3 - Limpeza de Nulos e Duplicatas -------------
+
+# ANÁLISE DOS VALORES NULOS ----------
+
+# Verificando a quantidade de valores nulos por coluna
+print("\nQUANTIDADE DE VALORES NULOS POR COLUNA:")
+print(df.isnull().sum())
+
+# Verificando se as colunas 'Unnamed' possuem algum valor
+print("\nVALORES NÃO NULOS NAS COLUNAS VAZIAS:")
+print(df[['Unnamed: 10', 'Unnamed: 11', 'Unnamed: 12', 'Unnamed: 13']].notna().sum())
+
+
+#  LIMPEZA DAS COLUNAS VAZIAS ----------
+
+colunas_vazias = [
+    'Unnamed: 10',
+    'Unnamed: 11',
+    'Unnamed: 12',
+    'Unnamed: 13'
+]
+
+df = df.drop(columns=colunas_vazias)
+
+print("\nTAMANHO DATAFRAME APÓS REMOÇÃO DAS COLUNAS VAZIAS:")
+print(df.shape)
+
+
+# ANÁLISE DE DUPLICATAS ----------
+
+# Verificando a quantidade de linhas completamente duplicadas
+print("\nQUANTIDADE DE DUPLICATAS COMPLETAS:")
+print(df.duplicated().sum())
+
+# Verificando todas as ocorrências das linhas duplicadas
+duplicatas = df[df.duplicated(keep=False)]
+
+print("\nQUANTIDADE DE REGISTROS ENVOLVIDOS EM DUPLICAÇÕES:")
+print(len(duplicatas))
+
+# Verificando quantas vezes as mesmas linhas aparecem
+print("\nQUANTIDADE DE VEZES QUE CADA LINHA DUPLICADA APARECE:")
+print(duplicatas.value_counts().head(20))
+
+
+# ANÁLISE DE PRODUTOS REPETIDOS ----------
+
+# Verificando quantas vezes um produto aparece dentro da mesma compra
+duplicatas_compra_produto = (
+    df.groupby(['CO_ID', 'PR_NOME'])
+      .size()
+      .sort_values(ascending=False)
+)
+
+print("\nPRODUTOS REPETIDOS DENTRO DA MESMA COMPRA:")
+print(duplicatas_compra_produto.head(20))
+
+# Identificando combinações de compra + produto que aparecem mais de uma vez
+compras_com_produtos_repetidos = (
+    duplicatas_compra_produto[duplicatas_compra_produto > 1]
+)
+
+print(
+    "\nQUANTIDADE DE COMBINAÇÕES COMPRA + PRODUTO REPETIDAS:",
+    len(compras_com_produtos_repetidos)
+)
+
+
+# TRATAMENTO DAS DUPLICATAS ----------
+
+quantidade_duplicatas = df.duplicated().sum()
+
+print("\nDUPLICATAS ENCONTRADAS ANTES DA LIMPEZA:", quantidade_duplicatas)
+
+# Removendo somente linhas completamente idênticas
+df = df.drop_duplicates()
+
+print("DUPLICATAS APÓS A LIMPEZA:", df.duplicated().sum())
+
+# TRATAMENTO DE #N/D ---------
+
+# Verificando a quantidade de valores #N/D em todas as colunas
+# para identificar onde existem dados ausentes representados por esse marcador
+print("\nQUANTIDADE DE #N/D POR COLUNA:")
+print((df == '#N/D').sum())
+
+# Visualizando as colunas PR_ID, PR_CAT e PR_NOME dos 20 primeiros registros
+print(df[df['PR_NOME'] == '#N/D'][['PR_ID', 'PR_CAT', 'PR_NOME']].head(20))
+
+# Agrupando os produtos sem nome por PR_ID e PR_CAT
+# para verificar a quantidade de registros em cada grupo
+print(
+    df[df['PR_NOME'] == '#N/D']
+    .groupby(['PR_ID', 'PR_CAT'])
+    .size()
+    .sort_values(ascending=False)
+    .head(20)
+)
+# Verificando quais nomes estão associados ao PR_ID 107
+# para confirmar que todos os registros estão sem nome
+print(df[df['PR_ID'] == 107]['PR_NOME'].unique())
+
+# Verificando se existem produtos sem nome e substituindo #N/D por "Sem Nome"
+
+if '#N/D' in df['PR_NOME'].values:
+    df['PR_NOME'] = df['PR_NOME'].replace('#N/D', 'Sem Nome')
+else:
+    print("Não foram encontrados produtos sem nome.")
+
+print("\nQUANTIDADE DE PRODUTOS SEM NOME APÓS A LIMPEZA:")
+print((df['PR_NOME'] == 'Sem Nome').sum())
+
+#Verificando novamente os valores após limpeza
+
+print("\nQUANTIDADE DE VALORES NULOS APÓS A LIMPEZA:")
+print(df.isnull().sum())
+
+print("\nDIMENSÕES DA BASE APÓS A LIMPEZA:")
+print(df.shape)
+
+print("\nTIPOS DE DADOS APÓS A LIMPEZA:")
+print(df.dtypes)
