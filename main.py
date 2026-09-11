@@ -103,6 +103,14 @@ print(df.isnull().sum())
 print("\nVALORES NÃO NULOS NAS COLUNAS VAZIAS:")
 print(df[['Unnamed: 10', 'Unnamed: 11', 'Unnamed: 12', 'Unnamed: 13']].notna().sum())
 
+# Verificando se o identificador CO_ID possui valores nulos
+
+print("\nVALIDAÇÃO DO IDENTIFICADOR DE COMPRA:")
+
+print("Quantidade de CO_ID nulos:", df['CO_ID'].isnull().sum())
+
+print("Quantidade de compras distintas:", df['CO_ID'].nunique())
+
 
 #  LIMPEZA DAS COLUNAS VAZIAS ----------
 
@@ -294,6 +302,8 @@ print(df['CL_FHL'].value_counts().sort_index())
 
 print("\nVERIFICAÇÃO DE DUPLICATAS:")
 print("Quantidade de duplicatas:", df.duplicated().sum())
+
+
 
 #---------- Sprint 6 - Exportação da base limpa -------------
 
