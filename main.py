@@ -1,5 +1,7 @@
 # ---------- Sprint 1 - Importacao e leitura dos dados -------------
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 
 # Carregando a base de dados - Base Varejo
 # O separador ';' é utilizado pois foi verificado que o arquivo CSV utiliza esse separador
@@ -211,3 +213,51 @@ print(df.shape)
 
 print("\nTIPOS DE DADOS APÓS A LIMPEZA:")
 print(df.dtypes)
+
+#---------- Sprint 4 - Estatística Descritiva -------------
+
+# Valores estatísticos descritivos da coluna CL_FHL (número de filhos)
+print("\nINFORMAÇÕES SOBRE O NÚMERO DE FILHOS:")
+print(df['CL_FHL'].describe())
+
+# Calculando a média do número de filhos
+print("\nMÉDIA DO NÚMERO DE FILHOS:")
+print(df['CL_FHL'].mean())
+
+# Calculando a mediana do número de filhos
+print("\nMEDIANA DO NÚMERO DE FILHOS:")
+print(df['CL_FHL'].median())
+
+# Calculando o desvio padrão do número de filhos
+print("\nDESVIO PADRÃO DO NÚMERO DE FILHOS:")
+print(df['CL_FHL'].std())
+
+# Calculando a moda do número de filhos
+print("\nMODA DO NÚMERO DE FILHOS:")
+print(df['CL_FHL'].mode())
+
+# Calculando o valor máximo do número de filhos
+print("\nMÁXIMO DE FILHOS:")
+print(df['CL_FHL'].max())
+
+# Calculando o valor mínimo do número de filhos
+print("\nMÍNIMO DE FILHOS:")
+print(df['CL_FHL'].min())
+
+# Calculando a quantidade de registros válidos na coluna CL_FHL
+print("\nQUANTIDADE DE REGISTROS:")
+print(df['CL_FHL'].count())
+
+# Calculando os quartis do número de filhos
+print("\nQUARTIS DO NÚMERO DE FILHOS:")
+print(df['CL_FHL'].quantile([0.25, 0.50, 0.75]))
+
+print("\nQUARTIS COM NUMPY:")
+print(np.percentile(df['CL_FHL'], [25, 50, 75]))
+
+# criando gráfico de boxplot para visualizar a distribuição do número de filhos
+plt.boxplot(df['CL_FHL'])
+plt.title('Distribuição do Número de Filhos')
+plt.ylabel('Número de Filhos')
+plt.show()
+

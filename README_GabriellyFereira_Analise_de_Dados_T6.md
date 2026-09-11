@@ -112,7 +112,32 @@ Também foi realizada uma verificação dos tipos de dados após a limpeza, mant
 
 ## Sprint 4 - Estatística descritiva
 
-*Em desenvolvimento.*
+Nesta etapa foi realizada a análise estatística da coluna `CL_FHL`, correspondente ao número de filhos dos clientes.
+
+Foram aplicadas funções estatísticas do Pandas para calcular a média, mediana, desvio padrão, moda, valor máximo, valor mínimo, quantidade de registros e quartis.
+
+### Resultados
+
+- **Média:** 1,1460 filhos
+- **Mediana:** 0 filhos
+- **Desvio padrão:** 1,4169
+- **Moda:** 0 filhos
+- **Máximo:** 4 filhos
+- **Mínimo:** 0 filhos
+- **Quantidade de registros:** 733.447
+- **1º quartil (25%):** 0 filhos
+- **2º quartil (50%):** 0 filhos
+- **3º quartil (75%):** 2 filhos
+
+Também foi utilizada a biblioteca NumPy para calcular os quartis por meio da função `percentile()`, permitindo comparar os resultados com os obtidos pelo Pandas.
+
+Para complementar a análise, foi utilizado um gráfico do tipo **boxplot**, permitindo visualizar a distribuição dos valores, a mediana e os quartis da quantidade de filhos.
+
+### Análise
+
+Os resultados mostram que a mediana e a moda são iguais a 0, indicando que 0 filhos é o valor mais frequente na base. A média de aproximadamente 1,15 filhos é superior à mediana devido à presença de registros com maior número de filhos.
+
+O terceiro quartil indica que 75% dos registros possuem até 2 filhos, enquanto o valor máximo encontrado foi de 4 filhos.
 
 ## Sprint 5 - Relatório e documentação
 
