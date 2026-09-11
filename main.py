@@ -261,3 +261,45 @@ plt.title('Distribuição do Número de Filhos')
 plt.ylabel('Número de Filhos')
 plt.show()
 
+#---------- Sprint 5 - Relatório e documentação -------------
+
+print("\n" + "-" * 50)
+print("RELATÓRIO FINAL - BASE VAREJO")
+print("-" * 50)
+
+print("\nINFORMAÇÕES DA BASE:")
+print("Quantidade de registros:", df.shape[0])
+print("Quantidade de colunas:", df.shape[1])
+
+print("\nINFORMAÇÕES DOS CLIENTES:")
+print("Quantidade de clientes:", df['CL_ID'].nunique())
+
+print("\nINFORMAÇÕES DAS COMPRAS:")
+print("Quantidade de compras:", df['CO_ID'].nunique())
+
+print("\nINFORMAÇÕES DOS PRODUTOS:")
+print("Quantidade de produtos:", df['PR_ID'].nunique())
+
+print("\nINFORMAÇÕES DAS CATEGORIAS:")
+print("Quantidade de categorias:", df['PR_CAT'].nunique())
+
+print("\nCATEGORIA COM MAIS REGISTROS:")
+print(df['PR_CAT'].value_counts().head(1))
+
+print("\nPRODUTO COM MAIS REGISTROS:")
+print(df['PR_NOME'].value_counts().head(1))
+
+print("\nDISTRIBUIÇÃO DO NÚMERO DE FILHOS:")
+print(df['CL_FHL'].value_counts().sort_index())
+
+print("\nVERIFICAÇÃO DE DUPLICATAS:")
+print("Quantidade de duplicatas:", df.duplicated().sum())
+
+#---------- Sprint 6 - Exportação da base limpa -------------
+
+df_limpo = df.copy()
+
+df_limpo.to_csv('df_limpo.csv', sep=';', index=False)
+
+print("\nBASE LIMPA EXPORTADA COM SUCESSO!")
+print("Arquivo: df_limpo.csv")

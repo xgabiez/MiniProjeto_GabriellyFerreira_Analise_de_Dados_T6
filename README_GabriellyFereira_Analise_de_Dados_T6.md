@@ -141,19 +141,82 @@ O terceiro quartil indica que 75% dos registros possuem até 2 filhos, enquanto 
 
 ## Sprint 5 - Relatório e documentação
 
-*Em desenvolvimento.*
+Nesta etapa foi desenvolvido um relatório final exibido no terminal, reunindo informações importantes sobre a base após o processo de limpeza e transformação.
 
-## Sprint 6 - Versionamento
+### Informações da base
 
-*Em desenvolvimento.*
+- **Registros:** 733.447
+- **Colunas:** 10
+- **Clientes:** 1.000
+- **Compras:** 18.471
+- **Produtos:** 229
+- **Categorias:** 7
+- **Duplicatas após a limpeza:** 0
+
+### Principais resultados
+
+- A categoria com maior quantidade de registros foi **ALIMENTOS**, com 384.197 registros.
+- O produto com maior quantidade de registros foi **PRESUNTO COZIDO**, com 12.719 registros.
+- O número de filhos mais frequente foi **0**, com 384.986 registros.
+- A base possui 1.000 clientes distintos e 18.471 compras distintas.
+- Após a limpeza, não permaneceram registros duplicados.
+
+---
 
 ## Insights e conclusões
 
-*Serão adicionados após a conclusão da análise exploratória.*
+A análise exploratória permitiu identificar alguns padrões importantes na base de varejo:
+
+1. **Predominância da categoria Alimentos:** a categoria `ALIMENTOS` possui 384.197 registros, sendo a categoria com maior presença na base.
+
+2. **Produto com maior frequência:** `PRESUNTO COZIDO` foi o produto que apresentou a maior quantidade de registros, com 12.719 ocorrências.
+
+3. **Perfil relacionado ao número de filhos:** o valor mais frequente para o número de filhos foi 0, com 384.986 registros. A média foi de aproximadamente 1,15 filhos.
+
+4. **Distribuição do número de filhos:** 75% dos registros possuem até 2 filhos, enquanto o maior valor identificado foi 4 filhos.
+
+5. **Qualidade dos dados:** após a remoção das duplicatas completas, tratamento dos valores ausentes e exclusão das colunas completamente vazias, a base ficou com 733.447 registros e 10 colunas, sem valores nulos ou duplicatas.
+
+
+## Sprint 6 - Versionamento
+
+Nesta etapa foi realizado o versionamento e envio dos arquivos do projeto para um repositório público no GitHub utilizando o Git.
+
+Foram enviados os seguintes arquivos:
+
+- `main.py` - script desenvolvido em Python contendo as etapas de análise e tratamento dos dados.
+- `README.md` - documentação do projeto, contendo as etapas realizadas, resultados, insights e reflexão teórica.
+- `df_limpo` - base de dados após os processos de transformação e limpeza realizados durante o projeto.
+
+O versionamento foi realizado utilizando commits ao longo do desenvolvimento, permitindo acompanhar a evolução do projeto por etapas.
+
 
 ## Reflexão teórica
 
 ### ETL
 
+O processo de ETL consiste nas etapas de **Extração, Transformação e Carga** dos dados.
+
+Neste projeto, a extração ocorreu por meio da leitura do arquivo `Base Varejo.csv` utilizando a biblioteca Pandas.
+
+Na etapa de transformação foram realizadas ações como padronização de textos, tratamento de valores ausentes, conversão da coluna de datas para `datetime`, identificação e remoção de duplicatas completas e exclusão de colunas sem informações.
+
+A etapa de carga pode ser relacionada à disponibilização da base limpa para as análises estatísticas e exploratórias realizadas durante o projeto.
+
+
 ### Qualidade dos dados
+
+A qualidade dos dados é importante para garantir que as análises sejam realizadas sobre informações consistentes e confiáveis.
+
+Durante o projeto foram identificados problemas como colunas completamente vazias, registros duplicados e valores `#N/D` representando informações ausentes.
+
+Os dados foram analisados antes da aplicação dos tratamentos, buSscando evitar alterações indevidas. As duplicatas foram removidas somente quando todos os campos eram exatamente iguais, enquanto repetições de produtos dentro das compras foram preservadas.
+
+Esse processo contribuiu para tornar a base mais organizada, padronizada e adequada para as análises realizadas.
+
+## Conclusão
+
+O projeto permitiu aplicar na prática conceitos de análise exploratória de dados utilizando Python, principalmente com as bibliotecas Pandas e NumPy.
+
+As etapas de transformação, limpeza, estatística descritiva e análise possibilitaram compreender melhor a estrutura e as características da base de varejo, além de demonstrar a importância da qualidade dos dados para a obtenção de resultados confiáveis.
 
